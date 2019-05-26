@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <title>Task 2</title>
+    </head>
+    <body>
+        <header class="container"><h2>Задание № 2</h2></header>
+        <main class="container">
+            <div class="row">
+            <form id="main_form" class="form-horizontal col-sm-4" action="" method="">
+                <fieldset>
+                    <div class="form-group">
+                        <label for="begin">Исходное положение</label><br/>
+                        <div>
+                            <input id="begin" type="text" name="begin" class="form-control"/>
+                        </div>
+                    </div>                    
+                    <div class="form-group">
+                        <button id="btn_proc" name="btn_proc" type="submit" value="submit" onclick="process()" class="btn btn-primary">Ок</button>
+                    </div>
+                </fieldset>
+            </form>
+            </div>
+        </main>
+        <footer class="container">
+            <div><span>&copy; 2019</span></div>
+            <noscript>
+                <p>Для корректной работы данной страницы включите поддержку скриптов.</p>
+            </noscript>
+            <script>          
+                function process(){
+                    var begin = document.getElementById("begin").value;
+                    var dashboard = [
+                                        ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8'],
+                                        ['B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'B7', 'B8'],
+                                        ['C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7', 'C8'],
+                                        ['D1', 'D2', 'D3', 'D4', 'D5', 'D6', 'D7', 'D8'],
+                                        ['E1', 'E2', 'E3', 'E4', 'E5', 'E6', 'E7', 'E8'],
+                                        ['F1', 'F2', 'F3', 'F4', 'F5', 'F6', 'F7', 'F8'],
+                                        ['G1', 'G2', 'G3', 'G4', 'G5', 'G6', 'G7', 'G8'],
+                                        ['H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'H7', 'H8']
+                                    ];
+                    var regex = new RegExp(/^[A-H]{1}[1-8]{1}$/);
+                    var result = '';
+                    if(regex.test(begin)){
+                        var chOne = begin.charCodeAt(0);
+                        var chTwo = Number(begin.charAt(1));
+                        var arrOfSteps = [];
+                        arrOfSteps.push(String.fromCharCode(chOne + 2) + (chTwo + 1));
+                        arrOfSteps.push(String.fromCharCode(chOne + 2) + (chTwo - 1));
+                        arrOfSteps.push(String.fromCharCode(chOne - 2) + (chTwo + 1));
+                        arrOfSteps.push(String.fromCharCode(chOne - 2) + (chTwo - 1));
+                        arrOfSteps.push(String.fromCharCode(chOne + 1) + (chTwo + 2));
+                        arrOfSteps.push(String.fromCharCode(chOne + 1) + (chTwo - 2));
+                        arrOfSteps.push(String.fromCharCode(chOne - 1) + (chTwo + 2));
+                        arrOfSteps.push(String.fromCharCode(chOne - 1) + (chTwo - 2));
+                        for(var i = 0; i < arrOfSteps.length; i++){
+                            if(regex.test(arrOfSteps[i])){
+                                result += arrOfSteps[i] + " ";
+                            }
+                        }
+                    }else{
+                        result += 'неправильно ввели данные по исходному положению фигуры \nпроверте и попробуйте снова';
+                    }
+                    
+                    alert("Возможные варианты хода:\n\n" + result);
+                }
+            </script>
+        </footer>
+    </body>
+</html>
